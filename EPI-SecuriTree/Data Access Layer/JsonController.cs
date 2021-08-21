@@ -8,7 +8,7 @@ namespace EPI_SecuriTree
 {
     class JsonController
     {
-		private readonly string _pathData = $"";
+		private readonly string _pathData = $"system_data.json";
 		private readonly string _pathUsers = $"registered_users.json";	
 
 
@@ -40,6 +40,58 @@ namespace EPI_SecuriTree
             }
 
 			return temp;
-		}		
+		}
+		
+		public void ReadAreaData()
+        {
+			string jsonFromFile = "";
+
+			using (var reader = new StreamReader(_pathData))
+			{
+				jsonFromFile = reader.ReadToEnd();
+			}
+
+			JObject obj = JObject.Parse(jsonFromFile);
+
+			List<Area> Areas = new List<Area>();
+			List<Door> Doors = new List<Door>();
+			List<AccessRules> Rules = new List<AccessRules>();
+
+			string type = "areas";
+			int inx = 0;
+
+			foreach (var item in obj["system_data"])
+			{
+				foreach (var itemnum in obj[type])
+				{
+                    if (inx == 0)
+                    {
+						Areas.Add(item.ToObject<Area>());
+                    }
+                    else if(inx == 1)
+					{
+						Doors.Add(item.ToObject<Door>());
+					}
+                    else if (inx == 2)
+                    {
+						Rules.Add(item.ToObject<AccessRules>());
+					}
+					
+				}
+
+				inx++;
+                if (inx == 1)
+                {
+					type = "doors";
+                }else if (inx == 2)
+                {
+					type = "access_rules";
+
+				}
+			}
+
+
+		}
+
 	}   
 }

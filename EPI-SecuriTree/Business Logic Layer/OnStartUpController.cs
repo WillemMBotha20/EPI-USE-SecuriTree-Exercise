@@ -14,6 +14,8 @@ namespace EPI_SecuriTree
         {
             datacon.CreateDatabase();
             datacon.CreateUserTable();
+            datacon.AreasTables();
+            datacon.ReadAreaData();
         }
 
     }

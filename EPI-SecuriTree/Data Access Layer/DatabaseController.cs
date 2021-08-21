@@ -46,6 +46,42 @@ namespace EPI_SecuriTree
             }            
         }
 
+        public void AreasTables()
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                List<string> tables = new List<string>();
+
+                tables.Add("CREATE TABLE areas (  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
+                tables.Add("CREATE TABLE childareas (  id VARCHAR(60) FOREIGN KEY REFERENCES areas,  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id) )");
+                tables.Add("CREATE TABLE doors(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60),  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id),  doorstatus BIT )");
+                tables.Add("CREATE TABLE access_rules(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
+                tables.Add("CREATE TABLE access_rule(  id VARCHAR(60) PRIMARY KEY,  access_rules_id VARCHAR(60) FOREIGN KEY REFERENCES access_rules(id),  doorid VARCHAR(60) FOREIGN KEY REFERENCES doors(id) ) ");
+
+                foreach (var item in tables)
+                {
+                    cmd = new SqlCommand(item,conn);
+                    cmd.ExecuteNonQuery();
+                }
+                
+                Console.WriteLine("Tables Created Successfully...");                
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void ReadAreaData()
+        {
+            con.ReadAreaData();
+        }
+
+
         //Creates the database on startup.
 
         public void CreateDatabase()
