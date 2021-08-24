@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,7 @@ namespace EPI_SecuriTree
 			return temp;
 		}
 		
-		public void ReadAreaData()
+		public System_Data ReadAreaData()
         {
 			string jsonFromFile = "";
 
@@ -52,46 +53,73 @@ namespace EPI_SecuriTree
 			}
 
 			JObject obj = JObject.Parse(jsonFromFile);
+			JObject obj2;
 
 			List<Area> Areas = new List<Area>();
 			List<Door> Doors = new List<Door>();
 			List<AccessRules> Rules = new List<AccessRules>();
+			List<string> AreaTemp = new List<string>();
+			string[] hold = new string[] { };
+			string holder = string.Empty;
 
-			string type = "areas";
 			int inx = 0;
 
 			foreach (var item in obj["system_data"])
 			{
-				foreach (var itemnum in obj[type])
-				{
-                    if (inx == 0)
+                foreach (var item2 in item)
+                {
+                    foreach (var item3 in item2)
                     {
-						Areas.Add(item.ToObject<Area>());
+						obj2 = (JObject)item3;						
+						holder = obj2["id"].ToString();					
+
+                        if (inx == 0)
+                        {							
+							foreach (var item4 in obj2["child_area_ids"])
+                            {
+								AreaTemp.Add(item4.ToString());
+                            }
+
+							hold = AreaTemp.ToArray();							
+
+                            if (obj2["parent_area"] == null)
+                            {
+								Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(),"null", hold));
+                            }
+                            else
+                            {
+								Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), hold));
+							}
+														
+							AreaTemp.Clear();
+						}
+						else if (inx == 1)
+                        {
+							Doors.Add(new Door(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), obj2["status"].ToString()));
+                        }
+						else if (inx == 2)
+                        {
+							foreach (var item4 in obj2["doors"])
+							{
+								AreaTemp.Add(item4.ToString());
+							}
+
+							hold = AreaTemp.ToArray();
+
+							Rules.Add(new AccessRules(obj2["id"].ToString(), obj2["name"].ToString(),hold)) ;
+
+							AreaTemp.Clear();
+						}
                     }
-                    else if(inx == 1)
-					{
-						Doors.Add(item.ToObject<Door>());
-					}
-                    else if (inx == 2)
-                    {
-						Rules.Add(item.ToObject<AccessRules>());
-					}
-					
-				}
+					inx++;
+				}              
+            }
 
-				inx++;
-                if (inx == 1)
-                {
-					type = "doors";
-                }else if (inx == 2)
-                {
-					type = "access_rules";
+			System_Data data = new System_Data(Areas,Doors,Rules);
 
-				}
-			}
+			Console.WriteLine(data);
 
-
+			return data;
 		}
-
 	}   
 }
