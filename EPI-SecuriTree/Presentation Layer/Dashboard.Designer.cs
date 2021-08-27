@@ -30,12 +30,14 @@ namespace EPI_SecuriTree
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnManageDoors = new System.Windows.Forms.Button();
+            this.btnHier = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -44,8 +46,6 @@ namespace EPI_SecuriTree
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -55,24 +55,49 @@ namespace EPI_SecuriTree
             // 
             this.panel1.BackColor = System.Drawing.Color.Silver;
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnManageDoors);
+            this.panel1.Controls.Add(this.btnHier);
             this.panel1.Location = new System.Drawing.Point(2, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(268, 640);
             this.panel1.TabIndex = 0;
             // 
-            // button1
+            // button3
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(3, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(262, 60);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(3, 577);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(262, 60);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // btnManageDoors
+            // 
+            this.btnManageDoors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnManageDoors.FlatAppearance.BorderSize = 0;
+            this.btnManageDoors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageDoors.Location = new System.Drawing.Point(3, 142);
+            this.btnManageDoors.Name = "btnManageDoors";
+            this.btnManageDoors.Size = new System.Drawing.Size(262, 60);
+            this.btnManageDoors.TabIndex = 3;
+            this.btnManageDoors.Text = "Manage Doors";
+            this.btnManageDoors.UseVisualStyleBackColor = false;
+            this.btnManageDoors.Click += new System.EventHandler(this.btnManageDoors_Click);
+            // 
+            // btnHier
+            // 
+            this.btnHier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnHier.FlatAppearance.BorderSize = 0;
+            this.btnHier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHier.Location = new System.Drawing.Point(3, 76);
+            this.btnHier.Name = "btnHier";
+            this.btnHier.Size = new System.Drawing.Size(262, 60);
+            this.btnHier.TabIndex = 0;
+            this.btnHier.Text = "Hierarchy";
+            this.btnHier.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
@@ -85,6 +110,17 @@ namespace EPI_SecuriTree
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(275, 70);
             this.panel2.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Limelight", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(10, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(236, 43);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Dashboard";
             // 
             // button4
             // 
@@ -112,17 +148,6 @@ namespace EPI_SecuriTree
             this.button6.TabIndex = 0;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Limelight", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 43);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Dashboard";
             // 
             // panel3
             // 
@@ -193,30 +218,6 @@ namespace EPI_SecuriTree
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(3, 142);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(262, 60);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(3, 577);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(262, 60);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,7 +247,7 @@ namespace EPI_SecuriTree
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnHier;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button4;
@@ -261,6 +262,6 @@ namespace EPI_SecuriTree
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnManageDoors;
     }
 }

@@ -21,5 +21,12 @@ namespace EPI_SecuriTree
         {
             System.Windows.Forms.Application.Exit();
         }
+
+        private void btnManageDoors_Click(object sender, EventArgs e)
+        {
+            txtManageDoors frmDoors = new txtManageDoors();
+            frmDoors.Show();
+            this.Hide();
+        }
     }
 }

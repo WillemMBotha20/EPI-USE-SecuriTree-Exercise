@@ -13,7 +13,8 @@ namespace EPI_SecuriTree
     class DatabaseController
     {
         JsonController con = new JsonController();
-        Encryptor enc = new Encryptor();        
+        Encryptor enc = new Encryptor();
+        System_Data data = new System_Data();
 
         public void CreateUserTable()
         {   
@@ -48,6 +49,8 @@ namespace EPI_SecuriTree
 
         public void AreasTables()
         {
+            data = con.ReadAreaData(); 
+
             try
             {
                 SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
@@ -55,19 +58,171 @@ namespace EPI_SecuriTree
                 SqlCommand cmd = new SqlCommand();
                 List<string> tables = new List<string>();
 
+                //Creating and inserting Areas
                 tables.Add("CREATE TABLE areas (  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
+                
+                //Making a seperate table for Child Areas
                 tables.Add("CREATE TABLE childareas (  id VARCHAR(60) FOREIGN KEY REFERENCES areas,  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id) )");
+               
+                //Creating and inserting Doors
                 tables.Add("CREATE TABLE doors(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60),  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id),  doorstatus VARCHAR(60) )");
+                
+                //Creating and inserting Access Rules
                 tables.Add("CREATE TABLE access_rules(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
-                tables.Add("CREATE TABLE access_rule(  id VARCHAR(60) PRIMARY KEY,  access_rules_id VARCHAR(60) FOREIGN KEY REFERENCES access_rules(id),  doorid VARCHAR(60) FOREIGN KEY REFERENCES doors(id) ) ");
-
+               
+                //Creating and inserting Access Rules
+                tables.Add("CREATE TABLE access_rule( access_rules_id VARCHAR(60) FOREIGN KEY REFERENCES access_rules(id),  doorid VARCHAR(60) FOREIGN KEY REFERENCES doors(id) ) ");
+               
                 foreach (var item in tables)
                 {
                     cmd = new SqlCommand(item,conn);
                     cmd.ExecuteNonQuery();
                 }
-                
+
+
+                InsertAreas(data.Areas); 
+                InsertChildAreas(data.Areas);
+                InsertDoors(data.Doors); 
+                InsertRules(data.Rules); 
+                InsertDoorRules(data.Rules);
+
                 Console.WriteLine("Tables Created Successfully...");                
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }      
+
+        public void InsertDoors(List<Door> doors)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                foreach (var item in doors)
+                {
+                    cmd = new SqlCommand($"INSERT INTO doors (id,name,parent_area_id,doorstatus) VALUES ('{ item.Id}','{item.Name}','{item.PrivateArea}','{item.Status}');", conn);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();            
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void InsertAreas(List<Area> areas)
+        {
+
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                foreach (var item in areas)
+                {
+                    cmd = new SqlCommand($"INSERT INTO areas (id,name) VALUES ('{ item.Id}','{item.Name}');", conn);
+                    cmd.ExecuteNonQuery();
+                }
+                conn.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void InsertChildAreas(List<Area> areas)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                foreach (var item in areas)
+                {
+                    foreach (var item2 in item.Child_area_ids)
+                    {
+                        cmd = new SqlCommand($"INSERT INTO childareas (id,parent_area_id) VALUES ('{item2.ToString()}','{item.Id}');", conn);
+                        cmd.ExecuteNonQuery();
+                    }                   
+                    
+                }
+                conn.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void InsertRules(List<AccessRules> rules)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                foreach (var item in rules)
+                {                   
+                    cmd = new SqlCommand($"INSERT INTO access_rules (id,name) VALUES ('{item.Id}','{item.Name}');", conn);
+                    cmd.ExecuteNonQuery();                  
+                }
+                conn.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void InsertDoorRules(List<AccessRules> rules)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                foreach (var item in rules)
+                {
+                    foreach (var item2 in item.Doors)
+                    {
+                        cmd = new SqlCommand($"INSERT INTO access_rule (access_rules_id,doorid) VALUES ('{item.Id}','{item2}');", conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    
+                }
+                conn.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public void ManageDoorStatusTrue(string doorId)
+        {          
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();             
+                cmd = new SqlCommand($"UPDATE doors SET doorstatus = 'closed' WHERE id = '{doorId}';", conn);
+                cmd.ExecuteNonQuery();                 
                 conn.Close();
             }
             catch (Exception e)
@@ -76,9 +231,46 @@ namespace EPI_SecuriTree
             }
         }
 
-        public void ReadAreaData()
+        public void ManageDoorStatusFalse(string doorId)
         {
-            con.ReadAreaData();
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd = new SqlCommand($"UPDATE doors SET doorstatus = 'open' WHERE id = '{doorId}';", conn);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
+
+        public DataSet CheckDoorStatus(string doorId)
+        {
+            DataSet ds = new DataSet();
+
+            try
+            {               
+                using (SqlConnection con = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree"))
+                {
+                    using (SqlCommand command = con.CreateCommand())
+                    {
+                        con.Open();
+                        command.CommandText = $"SELECT * FROM doors WHERE id = '{doorId}';";
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(ds);
+                    }
+                }                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+
+            return ds;
         }
 
 

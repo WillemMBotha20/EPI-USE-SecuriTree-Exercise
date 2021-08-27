@@ -19,6 +19,11 @@ namespace EPI_SecuriTree
             _rules = rules;
         }
 
+        public System_Data()
+        {
+
+        }
+
         internal List<Area> Areas { get => _areas; set => _areas = value; }
         internal List<Door> Doors { get => _doors; set => _doors = value; }
         internal List<AccessRules> Rules { get => _rules; set => _rules = value; }

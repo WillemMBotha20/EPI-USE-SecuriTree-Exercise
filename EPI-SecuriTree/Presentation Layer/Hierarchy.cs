@@ -16,5 +16,10 @@ namespace EPI_SecuriTree
         {
             InitializeComponent();
         }
+
+        private void Hierarchy_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
