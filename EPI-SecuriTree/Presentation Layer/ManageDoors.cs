@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace EPI_SecuriTree
 {
-    public partial class txtManageDoors : Form
+    public partial class ManageDoors : Form
     {
         DoorManager manager = new DoorManager();
 
-        public txtManageDoors()
+        public ManageDoors()
         {
             InitializeComponent();
         }
@@ -64,9 +64,7 @@ namespace EPI_SecuriTree
                     btnLock.Enabled = false;
                     lblId.Text = txtDoorId.Text;
                     lblStatus.Text = "closed";
-                }
-                
-               
+                }                          
             }
         }
 

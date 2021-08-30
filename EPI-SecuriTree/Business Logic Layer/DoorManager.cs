@@ -28,8 +28,7 @@ namespace EPI_SecuriTree
             catch (Exception)
             {
                 throw;
-            }          
-            
+            }                
         }
 
         public void LockDoor(string id)

@@ -98,6 +98,7 @@ namespace EPI_SecuriTree
             this.btnHier.TabIndex = 0;
             this.btnHier.Text = "Hierarchy";
             this.btnHier.UseVisualStyleBackColor = false;
+            this.btnHier.Click += new System.EventHandler(this.btnHier_Click);
             // 
             // panel2
             // 

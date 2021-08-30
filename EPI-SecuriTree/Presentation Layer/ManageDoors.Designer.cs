@@ -1,7 +1,7 @@
 ﻿
 namespace EPI_SecuriTree
 {
-    partial class txtManageDoors
+    partial class ManageDoors
     {
         /// <summary>
         /// Required designer variable.
@@ -34,15 +34,15 @@ namespace EPI_SecuriTree
             this.btnBack = new System.Windows.Forms.Button();
             this.txtDoorId = new System.Windows.Forms.TextBox();
             this.btnLock = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picbxLight = new System.Windows.Forms.PictureBox();
+            this.picbxDoor = new System.Windows.Forms.PictureBox();
             this.btnUnlock = new System.Windows.Forms.Button();
             this.lblId = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbxLight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbxDoor)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -107,21 +107,21 @@ namespace EPI_SecuriTree
             this.btnLock.UseVisualStyleBackColor = false;
             this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
-            // pictureBox1
+            // picbxLight
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(665, 56);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(82, 78);
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
+            this.picbxLight.Location = new System.Drawing.Point(665, 56);
+            this.picbxLight.Name = "picbxLight";
+            this.picbxLight.Size = new System.Drawing.Size(82, 78);
+            this.picbxLight.TabIndex = 13;
+            this.picbxLight.TabStop = false;
             // 
-            // pictureBox2
+            // picbxDoor
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(594, 140);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(226, 354);
-            this.pictureBox2.TabIndex = 14;
-            this.pictureBox2.TabStop = false;
+            this.picbxDoor.Location = new System.Drawing.Point(594, 140);
+            this.picbxDoor.Name = "picbxDoor";
+            this.picbxDoor.Size = new System.Drawing.Size(226, 354);
+            this.picbxDoor.TabIndex = 14;
+            this.picbxDoor.TabStop = false;
             // 
             // btnUnlock
             // 
@@ -165,7 +165,7 @@ namespace EPI_SecuriTree
             this.lblStatus.TabIndex = 18;
             this.lblStatus.Text = "label2";
             // 
-            // txtManageDoors
+            // ManageDoors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -174,19 +174,19 @@ namespace EPI_SecuriTree
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnUnlock);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picbxDoor);
+            this.Controls.Add(this.picbxLight);
             this.Controls.Add(this.btnLock);
             this.Controls.Add(this.txtDoorId);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.panel9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "txtManageDoors";
+            this.Name = "ManageDoors";
             this.Text = "ManageDoors";
             this.Load += new System.EventHandler(this.txtManageDoors_Load);
             this.panel9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbxLight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbxDoor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,8 +199,8 @@ namespace EPI_SecuriTree
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtDoorId;
         private System.Windows.Forms.Button btnLock;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox picbxLight;
+        private System.Windows.Forms.PictureBox picbxDoor;
         private System.Windows.Forms.Button btnUnlock;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label lblName;

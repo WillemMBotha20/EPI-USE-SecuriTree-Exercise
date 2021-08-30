@@ -24,8 +24,15 @@ namespace EPI_SecuriTree
 
         private void btnManageDoors_Click(object sender, EventArgs e)
         {
-            txtManageDoors frmDoors = new txtManageDoors();
+            ManageDoors frmDoors = new ManageDoors();
             frmDoors.Show();
+            this.Hide();
+        }
+
+        private void btnHier_Click(object sender, EventArgs e)
+        {
+            Hierarchy frmHier = new Hierarchy();
+            frmHier.Show();
             this.Hide();
         }
     }
