@@ -33,7 +33,9 @@ namespace EPI_SecuriTree
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+           Application.Exit();
+            UserManager um = new UserManager();
+            um.ClearCache();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -46,6 +48,15 @@ namespace EPI_SecuriTree
         {
             OnStartUpController startObj = new OnStartUpController();
             startObj.StartUpDatabase();
+            UserManager um = new UserManager();
+            um.ClearCache();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            RegisterForm reg = new RegisterForm();
+            reg.Show();
+            this.Hide();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,13 +15,28 @@ namespace EPI_SecuriTree
     {
         DoorManager manager = new DoorManager();
 
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+      (
+          int nLeftRect,     // x-coordinate of upper-left corner
+          int nTopRect,      // y-coordinate of upper-left corner
+          int nRightRect,    // x-coordinate of lower-right corner
+          int nBottomRect,   // y-coordinate of lower-right corner
+          int nWidthEllipse, // width of ellipse
+          int nHeightEllipse // height of ellipse
+      );
+
         public ManageDoors()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            UserManager um = new UserManager();
+            um.ClearCache();
             Application.Exit();
         }
 
@@ -39,7 +55,10 @@ namespace EPI_SecuriTree
         private void txtManageDoors_Load(object sender, EventArgs e)
         {
             btnUnlock.Enabled = false;
-            btnLock.Enabled = false;
+            btnLock.Enabled = false;            
+            picbxDoor.ImageLocation = @"Closed.png";
+            picbxLight.ImageLocation = @"";
+           
         }
 
         private void txtDoorId_TextChanged(object sender, EventArgs e)
@@ -48,6 +67,9 @@ namespace EPI_SecuriTree
             {
                 btnUnlock.Enabled = false;
                 btnLock.Enabled = false;
+                picbxLight.ImageLocation = @"Locked.png";
+                picbxDoor.ImageLocation = @"Closed.png";
+
             }
             else
             {               
@@ -56,14 +78,19 @@ namespace EPI_SecuriTree
                     btnLock.Enabled = true;
                     btnUnlock.Enabled = false;
                     lblId.Text = txtDoorId.Text;
-                    lblStatus.Text = "open";
+                    picbxLight.ImageLocation = @"Unlocked.png";
+                    picbxDoor.ImageLocation = @"Open.png";
+                    lblId.Text = "open";
+
                 }
                 else
                 {
+                    picbxLight.ImageLocation = @"Locked.png";
                     btnUnlock.Enabled = true;
-                    btnLock.Enabled = false;
-                    lblId.Text = txtDoorId.Text;
-                    lblStatus.Text = "closed";
+                    btnLock.Enabled = false;                    
+                    lblId.Text = txtDoorId.Text;                   
+                    picbxDoor.ImageLocation = @"Closed.png";
+                    lblId.Text = "closed";
                 }                          
             }
         }
@@ -77,14 +104,18 @@ namespace EPI_SecuriTree
                 btnLock.Enabled = true;
                 btnUnlock.Enabled = false;
                 lblId.Text = txtDoorId.Text;
-                lblStatus.Text = "open";
+                picbxLight.ImageLocation = @"Unlocked.png";
+                picbxDoor.ImageLocation = @"Open.png";
+                lblId.Text = "open";
             }
             else
             {
                 btnUnlock.Enabled = true;
                 btnLock.Enabled = false;
                 lblId.Text = txtDoorId.Text;
-                lblStatus.Text = "closed";
+                picbxLight.ImageLocation = @"Locked.png";
+                picbxDoor.ImageLocation = @"Closed.png";
+                lblId.Text = "closed";
             }
         }
 
@@ -96,14 +127,18 @@ namespace EPI_SecuriTree
                 btnLock.Enabled = true;
                 btnUnlock.Enabled = false;
                 lblId.Text = txtDoorId.Text;
-                lblStatus.Text = "open";
+                picbxLight.ImageLocation = @"Unlocked.png";
+                picbxDoor.ImageLocation = @"Open.png";
+                lblId.Text = "open";
             }
             else
             {
                 btnUnlock.Enabled = true;
                 btnLock.Enabled = false;
                 lblId.Text = txtDoorId.Text;
-                lblStatus.Text = "closed";
+                picbxLight.ImageLocation = @"Locked.png";
+                picbxDoor.ImageLocation = @"Closed.png";
+                lblId.Text = "closed";
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EPI_SecuriTree
 {
+    [Serializable]
     class User
     {
         private string _username;
@@ -24,6 +25,11 @@ namespace EPI_SecuriTree
         public User()
         {
 
+        }
+
+        public User(string username)
+        {
+            _username = username;
         }
 
         public string Username { get => _username; set => _username = value; }

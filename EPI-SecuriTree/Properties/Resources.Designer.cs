@@ -63,6 +63,46 @@ namespace EPI_SecuriTree.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _5e871279e324c_thumbCard {
+            get {
+                object obj = ResourceManager.GetObject("5e871279e324c_thumbCard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Closed {
+            get {
+                object obj = ResourceManager.GetObject("Closed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ComplexScornfulKookaburra_max_1mb {
+            get {
+                object obj = ResourceManager.GetObject("ComplexScornfulKookaburra-max-1mb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_user_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-user-64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap images {
             get {
                 object obj = ResourceManager.GetObject("images", resourceCulture);
@@ -76,6 +116,16 @@ namespace EPI_SecuriTree.Properties {
         internal static System.Drawing.Bitmap index {
             get {
                 object obj = ResourceManager.GetObject("index", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Open {
+            get {
+                object obj = ResourceManager.GetObject("Open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

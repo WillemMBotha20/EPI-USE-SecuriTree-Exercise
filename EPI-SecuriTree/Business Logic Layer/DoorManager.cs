@@ -27,7 +27,7 @@ namespace EPI_SecuriTree
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }                
         }
 

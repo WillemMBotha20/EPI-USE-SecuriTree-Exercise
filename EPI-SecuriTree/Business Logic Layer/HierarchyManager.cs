@@ -13,19 +13,19 @@ namespace EPI_SecuriTree
         HierarchyDatabaseController con = new HierarchyDatabaseController();
 
         public void CreateHiercy(TreeView view)
-        {            
+        {
             DataSet tempSet = new DataSet();
             DataSet tempSetSec = new DataSet();
             DataSet tempSetTh = new DataSet();
             DataSet tempSetFour = new DataSet();
             DataSet tempSetFifth = new DataSet();
-            TreeNode tNode;
+            TreeNode tNode = new TreeNode();
             List<TreeNode> node = new List<TreeNode>();
+            
             string id;
 
             tempSet = con.GetChildren("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
-            tNode = view.Nodes.Add("Wonka Factory");
-
+                       
             node = CreateNode("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
             view.Nodes.Add(node[0]);
             view.Nodes.Add(node[1]);
@@ -34,82 +34,149 @@ namespace EPI_SecuriTree
             {
                 id = tempSet.Tables[0].Rows[i]["id"].ToString();
                 node = CreateNode(id);
-                view.Nodes.Add(node[0]);
-                view.Nodes.Add(node[1]);
+
+                TreeNode nodeOne = new TreeNode();
+
+                nodeOne.Nodes.Add(node[0]);
+                nodeOne.Nodes.Add(node[1]);
+
+                try
+                {
+                    nodeOne.Text = con.GetName(id).Tables[0].Rows[0]["name"].ToString();
+                }
+                catch (Exception)
+                {
+
+                    
+                }              
+                             
+                view.Nodes.Add(nodeOne);
 
                 tempSetSec = con.GetChildren(id);
 
                 for (int z = 0; z < tempSetSec.Tables[0].Rows.Count; z++)
                 {
+
+                    id = tempSetSec.Tables[0].Rows[z]["id"].ToString();
+
+                    node = CreateNode(id);
+
+                    TreeNode nodeTwo = new TreeNode();
+
+                    nodeTwo.Nodes.Add(node[0]);
+                    nodeTwo.Nodes.Add(node[1]);
+
                     try
                     {
-                        id = tempSetSec.Tables[0].Rows[z]["id"].ToString();
-                        node = CreateNode(id);
-                        view.Nodes[z].Nodes.Add(node[0]);
-                        view.Nodes[z].Nodes.Add(node[1]);
-
-                        tempSetTh = con.GetChildren(id);
-
-                        for (int x = 0; x < tempSetTh.Tables[0].Rows.Count; x++)
-                        {
-                            try
-                            {
-                                id = tempSetTh.Tables[0].Rows[x]["id"].ToString();
-                                node = CreateNode(id);
-                                view.Nodes[x].Nodes.Add(node[0]);
-                                view.Nodes[x].Nodes.Add(node[1]);
-
-                                tempSetFour = con.GetChildren(id);
-
-                                for (int y = 0; y < tempSetFour.Tables[0].Rows.Count; y++)
-                                {
-                                    try
-                                    {
-                                        id = tempSetFour.Tables[0].Rows[y]["id"].ToString();
-                                        node = CreateNode(id);
-                                        view.Nodes[y].Nodes.Add(node[0]);
-                                        view.Nodes[y].Nodes.Add(node[1]);
-
-                                        tempSetFifth = con.GetChildren(id);
-
-                                        for (int h = 0; x < tempSetFifth.Tables[0].Rows.Count; h++)
-                                        {
-                                            try
-                                            {
-                                                id = tempSetFifth.Tables[0].Rows[h]["id"].ToString();
-                                                node = CreateNode(id);
-                                                view.Nodes[h].Nodes.Add(node[0]);
-                                                view.Nodes[h].Nodes.Add(node[1]);
-                                            }
-                                            catch (Exception)
-                                            {
-                                                Console.WriteLine("No Childern!");
-                                            }
-                                        }
-                                    }
-                                    catch (Exception)
-                                    {
-                                        Console.WriteLine("No Childern!");
-                                    }
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("No Childern!");
-                            }
-                        }
-
+                        nodeTwo.Text = con.GetName(id).Tables[0].Rows[0]["name"].ToString();
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("No Childern!");                        
-                    }                   
+
+                        
+                    }                    
+
+                    view.Nodes[i + 2].Nodes.Add(nodeTwo);
+
+                    tempSetTh = con.GetChildren(id);
+
+                    for (int x = 0; x < tempSetTh.Tables[0].Rows.Count; x++)
+                    {
+
+                        id = tempSetTh.Tables[0].Rows[x]["id"].ToString();
+                        node = CreateNode(id);
+
+                        TreeNode nodeThree = new TreeNode();
+
+                        nodeThree.Nodes.Add(node[0]);
+                        nodeThree.Nodes.Add(node[1]);
+
+                        DataSet testing = con.GetName(id);                       
+
+                        Console.WriteLine(testing);
+
+                        try
+                        {
+                             nodeThree.Text = con.GetName(id).Tables[0].Rows[0]["name"].ToString();
+                        }
+                        catch (Exception)
+                        {
+
+                           
+                        }                       
+
+                        view.Nodes[i + 2].Nodes[z + 2].Nodes.Add(nodeThree);
+
+                        tempSetFour = con.GetChildren(id);
+
+                        for (int y = 0; y < tempSetFour.Tables[0].Rows.Count; y++)
+                        {
+
+                            id = tempSetFour.Tables[0].Rows[y]["id"].ToString();
+                            node = CreateNode(id);
+
+                            TreeNode nodeFour = new TreeNode();
+
+                            nodeFour.Nodes.Add(node[0]);
+                            nodeFour.Nodes.Add(node[1]);
+
+                            try
+                            {
+                                nodeFour.Text = con.GetName(id).Tables[0].Rows[0]["name"].ToString();
+                            }
+                            catch (Exception)
+                            {
+
+                          
+                            }                            
+
+                            view.Nodes[i + 2].Nodes[z + 2].Nodes[y + 2].Nodes.Add(nodeFour);
+
+                            tempSetFifth = con.GetChildren(id);                           
+
+                            for (int h = 0; x < tempSetFifth.Tables[0].Rows.Count; h++)
+                            {
+
+                                id = tempSetFifth.Tables[0].Rows[h]["id"].ToString();
+                                node = CreateNode(id);
+
+                                TreeNode nodeFive = new TreeNode();
+
+                                nodeFive.Nodes.Add(node[0]);
+                                nodeFive.Nodes.Add(node[1]);
+
+                                nodeFive.Text = con.GetName(id).Tables[0].Rows[0]["name"].ToString();
+
+                                view.Nodes[i + 2].Nodes[z].Nodes[x].Nodes[y].Nodes.Add(nodeFive);
+
+                            }
+
+                        }
+
+                    }
+
                 }
-            }                       
+            }
         }
 
+        public List<string> GetCount()
+        {
+            List<string> amount = new List<string>();
+
+            int open = con.DoorsOpen();
+            int closed = con.DoorsClosed();
+            int total = open + closed;
+
+            amount.Add(open.ToString());
+            amount.Add(closed.ToString());
+            amount.Add(total.ToString());
+
+            return amount;
+           
+        } 
+
         public List<TreeNode> CreateNode(string id)
-        {           
+        {
             DataSet set = new DataSet();
             DataSet rulesSet = new DataSet();
             TreeNode doorNodes = new TreeNode(); ;
@@ -121,20 +188,35 @@ namespace EPI_SecuriTree
 
             for (int i = 0; i < set.Tables[0].Rows.Count; i++)
             {
-                object temp = set.Tables[0].Rows[i]["name"]; 
-                doorNodes.Nodes.Add(temp.ToString());
+                object temp = set.Tables[0].Rows[i]["name"];
+
+                string stats = set.Tables[0].Rows[i]["doorstatus"].ToString();
+
+                if (stats == "open")
+                {
+                    stats = "(UNLOCKED)";
+                }
+                else
+                {
+                    stats = "(LOCKED)";
+                }
+
+                doorNodes.Nodes.Add(temp.ToString() + " " + stats);
 
                 rulesSet = con.GetRules(set.Tables[0].Rows[i]["id"].ToString());
 
                 for (int z = 0; z < rulesSet.Tables[0].Rows.Count; z++)
                 {
                     object ruleTemp = rulesSet.Tables[0].Rows[z]["access_rules_id"];
-                    rules.Add(ruleTemp.ToString());
+                    string name = con.GetRuleName(ruleTemp.ToString()).Tables[0].Rows[0]["name"].ToString();
+                    rules.Add(name);
                 }
-            }            
+            }
+
+            rules = rules.Distinct().ToList();
 
             foreach (var item in rules)
-            {
+            {               
                 rulesNodes.Nodes.Add(item);
             }
 
@@ -147,5 +229,5 @@ namespace EPI_SecuriTree
         }
     }
 
-    
+
 }

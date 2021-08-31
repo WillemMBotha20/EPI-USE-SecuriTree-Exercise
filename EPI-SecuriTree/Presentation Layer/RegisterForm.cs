@@ -11,8 +11,9 @@ using System.Windows.Forms;
 
 namespace EPI_SecuriTree
 {
-    public partial class Dashboard : Form
+    public partial class RegisterForm : Form
     {
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
       (
@@ -23,62 +24,60 @@ namespace EPI_SecuriTree
           int nWidthEllipse, // width of ellipse
           int nHeightEllipse // height of ellipse
       );
-
-        LoginController login = new LoginController();
-        UserManager um = new UserManager();
-
-        public Dashboard()
+        public RegisterForm()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void RegisterForm_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
-            um.ClearCache();
+
         }
 
-        private void btnManageDoors_Click(object sender, EventArgs e)
+        private void btnCan_Click(object sender, EventArgs e)
         {
-            ManageDoors frmDoors = new ManageDoors();
-            frmDoors.Show();
-            this.Hide();
+            LoginScreen log = new LoginScreen();
+            log.Show();
+            this.Close();
         }
 
-        private void btnHier_Click(object sender, EventArgs e)
+        private void txtUsername_TextChanged(object sender, EventArgs e)
         {
-            Hierarchy frmHier = new Hierarchy();
-            frmHier.Show();
-            this.Hide();
+
         }
 
-        private void Dashboard_Load(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
             UserManager um = new UserManager();
-            HierarchyManager man = new HierarchyManager();
-            List<string> temp = new List<string>();
-            temp = man.GetCount();
+            LoginScreen log = new LoginScreen();
 
-            lblUn.Text = temp[0];
-            lblLock.Text = temp[1]; 
-            lblTotal.Text = temp[2];
+            try
+            {
+                if (txtUsername.Text != string.Empty && txtFirstName.Text != string.Empty && txtSurname.Text != string.Empty && txtPassword.Text != string.Empty)
+                {
+                    um.InsertUser(txtUsername.Text, txtFirstName.Text, txtSurname.Text, txtPassword.Text);
+                    log.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Please fill in all fields!");
+                }
+            }
+            catch (Exception)
+            {
 
-            lblUser.Text = um.DeserializeUser();
+                
+            }                  
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            um.ClearCache();
             LoginScreen log = new LoginScreen();
             log.Show();
             this.Hide();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

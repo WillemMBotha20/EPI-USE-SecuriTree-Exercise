@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +15,7 @@ namespace EPI_SecuriTree
     {
         UserDataAccessController userCon = new UserDataAccessController();
         Encryptor enc = new Encryptor();
+        UserManager um = new UserManager();
 
         public void Validate(string username,string password, Form temp)
         {
@@ -31,6 +35,7 @@ namespace EPI_SecuriTree
                         if (enc.EncryptMD5(password) == hash)
                         {
                             Dashboard dash = new Dashboard();
+                            um.SerializeUser(ds.Tables[0].Rows[0]["FirstName"].ToString(), ds.Tables[0].Rows[0]["Surname"].ToString());
                             dash.Show();
                             temp.Hide();
                         }
@@ -42,12 +47,9 @@ namespace EPI_SecuriTree
                 }
                 catch (Exception)
                 {
-
                     MessageBox.Show("Wrong Username!");
                 }
-                             
             }  
         }
-
     }
 }

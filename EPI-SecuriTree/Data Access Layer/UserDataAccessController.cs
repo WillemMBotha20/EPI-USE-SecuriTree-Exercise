@@ -26,5 +26,27 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+
+        public void InsertUser(User user)
+        {
+            Encryptor en = new Encryptor();
+
+            try
+            {
+                SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+               
+                cmd = new SqlCommand($"INSERT INTO Registered_Users (Username,FirstName,Surname,Password) VALUES ('{user.Username}','{user.First_name}','{user.Surname}','{en.EncryptMD5(user.Password)}');", conn);
+                cmd.ExecuteNonQuery();
+                
+                conn.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
+            }
+        }
     }
 }
