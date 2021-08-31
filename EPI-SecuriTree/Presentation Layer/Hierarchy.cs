@@ -16,10 +16,11 @@ namespace EPI_SecuriTree
         {
             InitializeComponent();
         }
+        HierarchyManager manager = new HierarchyManager();
 
         private void Hierarchy_Load(object sender, EventArgs e)
         {
-
+            manager.CreateHiercy(trvHier);
         }
 
         private void btnBack_Click(object sender, EventArgs e)

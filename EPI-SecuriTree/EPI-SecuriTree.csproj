@@ -62,6 +62,7 @@
     <Compile Include="Business Logic Layer\DoorManager.cs" />
     <Compile Include="Business Logic Layer\HierarchyManager.cs" />
     <Compile Include="Data Access Layer\HierarchyDataController.cs" />
+    <Compile Include="Data Access Layer\HierarchyDatabaseController.cs" />
     <Compile Include="Presentation Layer\ManageDoors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tree-silhouette-deciduous-tree-152335086.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\output-onlinepngtools.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
