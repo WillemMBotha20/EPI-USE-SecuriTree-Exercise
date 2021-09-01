@@ -10,7 +10,7 @@ namespace EPI_SecuriTree
     class Encryptor
     {
         //MD5 Encrypting Algorithm
-
+       
         public string EncryptMD5(string input)
         {
             MD5 md5 = MD5.Create();

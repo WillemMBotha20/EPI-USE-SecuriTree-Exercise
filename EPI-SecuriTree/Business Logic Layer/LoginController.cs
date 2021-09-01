@@ -39,6 +39,8 @@ namespace EPI_SecuriTree
                         if (enc.EncryptMD5(password) == hash)
                         {
                             Dashboard dash = new Dashboard();
+                            
+                            //Storing user login information.
                             um.SerializeUser(ds.Tables[0].Rows[0]["FirstName"].ToString(), ds.Tables[0].Rows[0]["Surname"].ToString());
                             dash.Show();
                             temp.Hide();
