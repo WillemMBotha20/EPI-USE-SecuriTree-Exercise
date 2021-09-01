@@ -11,7 +11,7 @@ namespace EPI_SecuriTree
     {
         //This class manages doors
 
-        DatabaseController con = new DatabaseController();
+        readonly DatabaseController con = new DatabaseController();
         public bool GetDoor(string doorId)
         {
             DataSet set = con.CheckDoorStatus(doorId);

@@ -35,7 +35,6 @@ namespace EPI_SecuriTree
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -117,20 +116,6 @@ namespace EPI_SecuriTree
             this.lblPassword.Size = new System.Drawing.Size(82, 16);
             this.lblPassword.TabIndex = 5;
             this.lblPassword.Text = "Password";
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(214)))), ((int)(((byte)(160)))));
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHelp.Font = new System.Drawing.Font("Russo One", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHelp.ForeColor = System.Drawing.Color.White;
-            this.btnHelp.Location = new System.Drawing.Point(646, 494);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 7;
-            this.btnHelp.Text = "Help";
-            this.btnHelp.UseVisualStyleBackColor = false;
             // 
             // lblHeader
             // 
@@ -216,7 +201,6 @@ namespace EPI_SecuriTree
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblHeader);
-            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtUsername);
@@ -245,7 +229,6 @@ namespace EPI_SecuriTree
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
