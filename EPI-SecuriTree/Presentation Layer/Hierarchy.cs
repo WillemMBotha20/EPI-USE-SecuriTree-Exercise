@@ -13,6 +13,8 @@ namespace EPI_SecuriTree
 {
     public partial class Hierarchy : Form
     {
+        //Used this source code to make the rounded corners on the forms.
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
       (
@@ -31,7 +33,7 @@ namespace EPI_SecuriTree
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
-        HierarchyManager manager = new HierarchyManager();
+        readonly HierarchyManager manager = new HierarchyManager();
 
         private void Hierarchy_Load(object sender, EventArgs e)
         {

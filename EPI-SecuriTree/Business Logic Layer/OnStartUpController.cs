@@ -8,7 +8,9 @@ namespace EPI_SecuriTree
 {
     class OnStartUpController
     {
-        DatabaseController datacon = new DatabaseController();
+        //Simulates the start up procedures...
+
+        readonly DatabaseController datacon = new DatabaseController();
 
         public void StartUpDatabase()
         {

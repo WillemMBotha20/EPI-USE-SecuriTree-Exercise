@@ -10,12 +10,11 @@ namespace EPI_SecuriTree
     class JsonController
     {
 		private readonly string _pathData = $"system_data.json";
-		private readonly string _pathUsers = $"registered_users.json";	
+		private readonly string _pathUsers = $"registered_users.json";
 
-
-		//Creates and converts to the json string;
-
-		public string ReadUsers()
+        #region "ReadUsers"
+        //Creates and converts to the json string;
+        public string ReadUsers()
         {
 			string jsonFromFile = "";			
 				
@@ -26,10 +25,11 @@ namespace EPI_SecuriTree
 
 			return jsonFromFile;				
 		}
-		
-		//Reads the json string and converts it to a list of users.
+        #endregion "ReadUsers"
 
-		public List<User> UserData()
+        #region "UserData"
+        //Reads the json string and converts it to a list of users.
+        public List<User> UserData()
         {
             JObject obj = JObject.Parse(ReadUsers());
 
@@ -42,8 +42,10 @@ namespace EPI_SecuriTree
 
 			return temp;
 		}
-		
-		public System_Data ReadAreaData()
+        #endregion "UserData"
+
+        #region "ReadAreaData"
+        public System_Data ReadAreaData()
         {
 			string jsonFromFile = "";
 
@@ -59,10 +61,8 @@ namespace EPI_SecuriTree
 			List<Door> Doors = new List<Door>();
 			List<AccessRules> Rules = new List<AccessRules>();
 			List<string> AreaTemp = new List<string>();
-			string[] hold = new string[] { };
-			string holder = string.Empty;
-
-			int inx = 0;
+            _ = new string[] { };
+            int inx = 0;
 
 			foreach (var item in obj["system_data"])
 			{
@@ -70,46 +70,46 @@ namespace EPI_SecuriTree
                 {
                     foreach (var item3 in item2)
                     {
-						obj2 = (JObject)item3;						
-						holder = obj2["id"].ToString();					
-
+						obj2 = (JObject)item3;
+                        string holder = obj2["id"].ToString();
+                        string[] hold;
                         if (inx == 0)
-                        {							
-							foreach (var item4 in obj2["child_area_ids"])
+                        {
+                            foreach (var item4 in obj2["child_area_ids"])
                             {
-								AreaTemp.Add(item4.ToString());
+                                AreaTemp.Add(item4.ToString());
                             }
 
-							hold = AreaTemp.ToArray();							
+                            hold = AreaTemp.ToArray();
 
                             if (obj2["parent_area"] == null)
                             {
-								Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(),"null", hold));
+                                Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(), "null", hold));
                             }
                             else
                             {
-								Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), hold));
-							}
-														
-							AreaTemp.Clear();
-						}
-						else if (inx == 1)
-                        {
-							Doors.Add(new Door(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), obj2["status"].ToString()));
+                                Areas.Add(new Area(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), hold));
+                            }
+
+                            AreaTemp.Clear();
                         }
-						else if (inx == 2)
+                        else if (inx == 1)
                         {
-							foreach (var item4 in obj2["doors"])
-							{
-								AreaTemp.Add(item4.ToString());
-							}
+                            Doors.Add(new Door(obj2["id"].ToString(), obj2["name"].ToString(), obj2["parent_area"].ToString(), obj2["status"].ToString()));
+                        }
+                        else if (inx == 2)
+                        {
+                            foreach (var item4 in obj2["doors"])
+                            {
+                                AreaTemp.Add(item4.ToString());
+                            }
 
-							hold = AreaTemp.ToArray();
+                            hold = AreaTemp.ToArray();
 
-							Rules.Add(new AccessRules(obj2["id"].ToString(), obj2["name"].ToString(),hold)) ;
+                            Rules.Add(new AccessRules(obj2["id"].ToString(), obj2["name"].ToString(), hold));
 
-							AreaTemp.Clear();
-						}
+                            AreaTemp.Clear();
+                        }
                     }
 					inx++;
 				}              
@@ -121,5 +121,6 @@ namespace EPI_SecuriTree
 
 			return data;
 		}
-	}   
+        #endregion "ReadAreaData"
+    }
 }

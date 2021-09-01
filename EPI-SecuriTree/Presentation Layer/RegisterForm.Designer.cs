@@ -242,6 +242,7 @@ namespace EPI_SecuriTree
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(361, 239);
             this.panel5.TabIndex = 29;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
             // RegisterForm
             // 

@@ -9,6 +9,8 @@ namespace EPI_SecuriTree
 {
     class DoorManager
     {
+        //This class manages doors
+
         DatabaseController con = new DatabaseController();
         public bool GetDoor(string doorId)
         {
@@ -31,11 +33,13 @@ namespace EPI_SecuriTree
             }                
         }
 
+        //Locks a door in the database
         public void LockDoor(string id)
         {
             con.ManageDoorStatusTrue(id);
         }
 
+        //Unlocks a door in the database
         public void UnlockDoor(string id)
         {
             con.ManageDoorStatusFalse(id);

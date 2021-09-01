@@ -10,6 +10,8 @@ namespace EPI_SecuriTree
 {
     class UserDataAccessController
     {
+        //This class managaes all functions related to users.
+
         public DataSet ValidateUser(string username)
         {
             DataSet ds = new DataSet();          
@@ -27,6 +29,7 @@ namespace EPI_SecuriTree
             return ds;
         }
 
+        //Inserts a user into the database.
         public void InsertUser(User user)
         {
             Encryptor en = new Encryptor();

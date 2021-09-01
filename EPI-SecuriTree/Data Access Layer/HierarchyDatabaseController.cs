@@ -10,6 +10,7 @@ namespace EPI_SecuriTree
 {
     class HierarchyDatabaseController
     {
+        #region "GetDoors"
         public DataSet GetDoors(string id)
         {
 
@@ -35,7 +36,9 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+        #endregion "GetDoors"
 
+        #region "GetRuleName"
         public DataSet GetRuleName(string id)
         {
             DataSet ds = new DataSet();
@@ -60,7 +63,9 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+        #endregion "GetRuleName"
 
+        #region "DoorsOpen"
         public int DoorsOpen()
         {
             Int32 amount = 0;
@@ -84,7 +89,9 @@ namespace EPI_SecuriTree
 
             return amount;
         }
+        #endregion "DoorsOpen"
 
+        #region "DoorsClosed"
         public int DoorsClosed()
         {
             Int32 amount = 0;
@@ -108,7 +115,9 @@ namespace EPI_SecuriTree
 
             return amount;
         }
+        #endregion "DoorsClosed"
 
+        #region "GetChildren"
         public DataSet GetChildren(string id)
         {
             DataSet ds = new DataSet();
@@ -133,7 +142,9 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+        #endregion "GetChildren"
 
+        #region "GetRules"
         public DataSet GetRules(string id)
         {
             DataSet ds = new DataSet();
@@ -158,7 +169,9 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+        #endregion "GetRules"
 
+        #region "GetName"
         public DataSet GetName(string id)
         {
             DataSet ds = new DataSet();
@@ -183,7 +196,6 @@ namespace EPI_SecuriTree
 
             return ds;
         }
-
-
+        #endregion "GetName"
     }
 }

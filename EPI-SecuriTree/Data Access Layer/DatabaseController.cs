@@ -12,10 +12,14 @@ namespace EPI_SecuriTree
 {
     class DatabaseController
     {
-        JsonController con = new JsonController();
-        Encryptor enc = new Encryptor();
+        readonly JsonController con = new JsonController();
+        readonly Encryptor enc = new Encryptor();
         System_Data data = new System_Data();
 
+        //This class's function is to set-up the database dynamically without having to do anything in SQL server except making sure that it is running.
+
+        #region "CreateUserTable"
+        //On startup this method will create the Database
         public void CreateUserTable()
         {   
             try
@@ -46,7 +50,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }            
         }
+        #endregion "MathFunctions"
 
+        #region "CreatesAreasTable"
         public void AreasTables()
         {
             data = con.ReadAreaData(); 
@@ -56,23 +62,25 @@ namespace EPI_SecuriTree
                 SqlConnection conn = new SqlConnection("Server=localhost;Integrated security=true;Database=SecuriTree");
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
-                List<string> tables = new List<string>();
+                List<string> tables = new List<string>
+                {
 
-                //Creating and inserting Areas
-                tables.Add("CREATE TABLE areas (  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
-                
-                //Making a seperate table for Child Areas
-                tables.Add("CREATE TABLE childareas (  id VARCHAR(60) FOREIGN KEY REFERENCES areas,  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id) )");
-               
-                //Creating and inserting Doors
-                tables.Add("CREATE TABLE doors(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60),  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id),  doorstatus VARCHAR(60) )");
-                
-                //Creating and inserting Access Rules
-                tables.Add("CREATE TABLE access_rules(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )");
-               
-                //Creating and inserting Access Rules
-                tables.Add("CREATE TABLE access_rule( access_rules_id VARCHAR(60) FOREIGN KEY REFERENCES access_rules(id),  doorid VARCHAR(60) FOREIGN KEY REFERENCES doors(id) ) ");
-               
+                    //Creating and inserting Areas
+                    "CREATE TABLE areas (  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )",
+
+                    //Making a seperate table for Child Areas
+                    "CREATE TABLE childareas (  id VARCHAR(60) FOREIGN KEY REFERENCES areas,  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id) )",
+
+                    //Creating and inserting Doors
+                    "CREATE TABLE doors(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60),  parent_area_id VARCHAR(60) FOREIGN KEY REFERENCES areas(id),  doorstatus VARCHAR(60) )",
+
+                    //Creating and inserting Access Rules
+                    "CREATE TABLE access_rules(  id VARCHAR(60) PRIMARY KEY,  name VARCHAR(60), )",
+
+                    //Creating and inserting Access Rules
+                    "CREATE TABLE access_rule( access_rules_id VARCHAR(60) FOREIGN KEY REFERENCES access_rules(id),  doorid VARCHAR(60) FOREIGN KEY REFERENCES doors(id) ) "
+                };
+
                 foreach (var item in tables)
                 {
                     cmd = new SqlCommand(item,conn);
@@ -93,8 +101,11 @@ namespace EPI_SecuriTree
             {
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
-        }      
+        }
 
+        #endregion "CreatesAreasTable"
+
+        #region "PopulatesDoors"
         public void InsertDoors(List<Door> doors)
         {
             try
@@ -117,6 +128,9 @@ namespace EPI_SecuriTree
             }
         }
 
+        #endregion "PopulatesDoors"
+
+        #region "PopulateAreas"
         public void InsertAreas(List<Area> areas)
         {
 
@@ -139,7 +153,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion "PopulateAreas"
 
+        #region "PopulateChildAreas"
         public void InsertChildAreas(List<Area> areas)
         {
             try
@@ -152,7 +168,7 @@ namespace EPI_SecuriTree
                 {
                     foreach (var item2 in item.Child_area_ids)
                     {
-                        cmd = new SqlCommand($"INSERT INTO childareas (id,parent_area_id) VALUES ('{item2.ToString()}','{item.Id}');", conn);
+                        cmd = new SqlCommand($"INSERT INTO childareas (id,parent_area_id) VALUES ('{item2}','{item.Id}');", conn);
                         cmd.ExecuteNonQuery();
                     }                   
                     
@@ -165,7 +181,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion "PopulateChildAreas"
 
+        #region "PopulateRules"
         public void InsertRules(List<AccessRules> rules)
         {
             try
@@ -187,7 +205,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion "PopulateRules"
 
+        #region "PopulateDoorRules"
         public void InsertDoorRules(List<AccessRules> rules)
         {
             try
@@ -213,7 +233,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion "PopulateDoorRulesTrue"
 
+        #region "ManageDoorStatus"
         public void ManageDoorStatusTrue(string doorId)
         {          
             try
@@ -230,7 +252,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion ""ManageDoorStatusTrue"
 
+        #region ""ManageDoorStatusFalse"
         public void ManageDoorStatusFalse(string doorId)
         {
             try
@@ -247,7 +271,9 @@ namespace EPI_SecuriTree
                 Console.WriteLine("exception occured while creating table:" + e.Message + "\t" + e.GetType());
             }
         }
+        #endregion ""ManageDoorStatusFalse"
 
+        #region "CheckStatus"
         public DataSet CheckDoorStatus(string doorId)
         {
             DataSet ds = new DataSet();
@@ -272,10 +298,10 @@ namespace EPI_SecuriTree
 
             return ds;
         }
+        #endregion "CheckStatus"
 
-
+        #region "CreateDatabase"
         //Creates the database on startup.
-
         public void CreateDatabase()
         {
             String str;
@@ -308,6 +334,7 @@ namespace EPI_SecuriTree
                 }
             }
         }
-        
+        #endregion "CreateDatabase"
+
     }
 }

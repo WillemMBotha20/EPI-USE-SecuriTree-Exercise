@@ -65,9 +65,9 @@ namespace EPI_SecuriTree
             this.trvHier.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.trvHier.Font = new System.Drawing.Font("Lemon", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trvHier.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(214)))), ((int)(((byte)(160)))));
-            this.trvHier.Location = new System.Drawing.Point(15, 66);
+            this.trvHier.Location = new System.Drawing.Point(74, 66);
             this.trvHier.Name = "trvHier";
-            this.trvHier.Size = new System.Drawing.Size(1056, 593);
+            this.trvHier.Size = new System.Drawing.Size(928, 559);
             this.trvHier.TabIndex = 8;
             this.trvHier.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvHier_AfterSelect);
             // 
@@ -78,7 +78,7 @@ namespace EPI_SecuriTree
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Russo One", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(12, 665);
+            this.btnBack.Location = new System.Drawing.Point(986, 652);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(71, 23);
             this.btnBack.TabIndex = 11;
@@ -90,7 +90,7 @@ namespace EPI_SecuriTree
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lemon", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 46);
+            this.label1.Location = new System.Drawing.Point(74, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 17);
             this.label1.TabIndex = 12;

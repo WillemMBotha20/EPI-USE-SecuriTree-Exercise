@@ -8,6 +8,8 @@ namespace EPI_SecuriTree
 {
     class System_Data
     {
+        //This class is to combine 2 list objects.
+
         private List<Area> _areas;
         private List<Door> _doors;
         private List<AccessRules> _rules;

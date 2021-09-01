@@ -13,6 +13,8 @@ namespace EPI_SecuriTree
 {
     public partial class LoginScreen : Form
     {
+        //Used this source code to make the rounded corners on the forms.
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
        (

@@ -12,14 +12,20 @@ namespace EPI_SecuriTree
 {
     class UserManager
     {
-        IFormatter formatter = new BinaryFormatter();
+        //Class manages the connection between the presentation layer and the data access layer.
+        //This class manages users and any information needed about users.
+
+        readonly IFormatter formatter = new BinaryFormatter();
         Stream stream;
 
+        //Used to store a signed in user.
         public void SerializeUser(string name, string surname)
         {
-            User tempUser = new User();
-            tempUser.First_name = name;
-            tempUser.Surname = surname;
+            User tempUser = new User
+            {
+                First_name = name,
+                Surname = surname
+            };
 
             Stream stream = new FileStream(@"User.txt", FileMode.Create, FileAccess.Write);
 
@@ -27,6 +33,7 @@ namespace EPI_SecuriTree
             stream.Close();
         }
 
+        //Used to read stored signed in user.
         public string DeserializeUser()
         {
             stream = new FileStream(@"User.txt", FileMode.Open, FileAccess.Read);
@@ -36,11 +43,13 @@ namespace EPI_SecuriTree
             return userObj.First_name + " " + userObj.Surname;
         }
 
+        //Cleaning up the user that was logged in.
         public void ClearCache()
         {
             File.Delete(@"User.txt");
         }
 
+        //Inserting a user into the database.
         public void InsertUser(string Username,string First, string Surname, string Password)
         {
             UserDataAccessController uac = new UserDataAccessController();

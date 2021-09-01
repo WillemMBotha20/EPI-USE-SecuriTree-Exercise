@@ -10,23 +10,25 @@ namespace EPI_SecuriTree
 {
     class HierarchyManager
     {
-        HierarchyDatabaseController con = new HierarchyDatabaseController();
+        readonly HierarchyDatabaseController con = new HierarchyDatabaseController();
 
+        #region "CreateHierarhcy"
+        //Hierarchy algorithm...
         public void CreateHiercy(TreeView view)
         {
-            DataSet tempSet = new DataSet();
-            DataSet tempSetSec = new DataSet();
-            DataSet tempSetTh = new DataSet();
-            DataSet tempSetFour = new DataSet();
-            DataSet tempSetFifth = new DataSet();
-            TreeNode tNode = new TreeNode();
-            List<TreeNode> node = new List<TreeNode>();
-            
+            _ = new DataSet();
+            _ = new DataSet();
+            _ = new DataSet();
+            _ = new DataSet();
+            _ = new DataSet();
+            _ = new TreeNode();
+            _ = new List<TreeNode>();
+
             string id;
 
-            tempSet = con.GetChildren("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
-                       
-            node = CreateNode("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
+            DataSet tempSet = con.GetChildren("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
+
+            List<TreeNode> node = CreateNode("6C4E2C5D-BBBB-4386-AA71-B7F56727433C");
             view.Nodes.Add(node[0]);
             view.Nodes.Add(node[1]);
 
@@ -52,7 +54,7 @@ namespace EPI_SecuriTree
                              
                 view.Nodes.Add(nodeOne);
 
-                tempSetSec = con.GetChildren(id);
+                DataSet tempSetSec = con.GetChildren(id);
 
                 for (int z = 0; z < tempSetSec.Tables[0].Rows.Count; z++)
                 {
@@ -78,7 +80,7 @@ namespace EPI_SecuriTree
 
                     view.Nodes[i + 2].Nodes.Add(nodeTwo);
 
-                    tempSetTh = con.GetChildren(id);
+                    DataSet tempSetTh = con.GetChildren(id);
 
                     for (int x = 0; x < tempSetTh.Tables[0].Rows.Count; x++)
                     {
@@ -107,7 +109,7 @@ namespace EPI_SecuriTree
 
                         view.Nodes[i + 2].Nodes[z + 2].Nodes.Add(nodeThree);
 
-                        tempSetFour = con.GetChildren(id);
+                        DataSet tempSetFour = con.GetChildren(id);
 
                         for (int y = 0; y < tempSetFour.Tables[0].Rows.Count; y++)
                         {
@@ -132,7 +134,7 @@ namespace EPI_SecuriTree
 
                             view.Nodes[i + 2].Nodes[z + 2].Nodes[y + 2].Nodes.Add(nodeFour);
 
-                            tempSetFifth = con.GetChildren(id);                           
+                            DataSet tempSetFifth = con.GetChildren(id);
 
                             for (int h = 0; x < tempSetFifth.Tables[0].Rows.Count; h++)
                             {
@@ -158,7 +160,9 @@ namespace EPI_SecuriTree
                 }
             }
         }
+        #endregion "CreateHierarhcy"
 
+        #region "GetCountOfDoors"
         public List<string> GetCount()
         {
             List<string> amount = new List<string>();
@@ -173,18 +177,21 @@ namespace EPI_SecuriTree
 
             return amount;
            
-        } 
+        }
+        #endregion "GetCountOfDoors"
 
+        #region "Creates a Node"
+        //This method creates a node that contains a node for doors and rules seperately.
         public List<TreeNode> CreateNode(string id)
         {
-            DataSet set = new DataSet();
-            DataSet rulesSet = new DataSet();
+            _ = new DataSet();
+            _ = new DataSet();
             TreeNode doorNodes = new TreeNode(); ;
             TreeNode rulesNodes = new TreeNode(); ;
             List<string> rules = new List<string>();
             List<TreeNode> mainNode = new List<TreeNode>();
 
-            set = con.GetDoors(id);
+            DataSet set = con.GetDoors(id);
 
             for (int i = 0; i < set.Tables[0].Rows.Count; i++)
             {
@@ -203,7 +210,7 @@ namespace EPI_SecuriTree
 
                 doorNodes.Nodes.Add(temp.ToString() + " " + stats);
 
-                rulesSet = con.GetRules(set.Tables[0].Rows[i]["id"].ToString());
+                DataSet rulesSet = con.GetRules(set.Tables[0].Rows[i]["id"].ToString());
 
                 for (int z = 0; z < rulesSet.Tables[0].Rows.Count; z++)
                 {
@@ -227,7 +234,6 @@ namespace EPI_SecuriTree
 
             return mainNode;
         }
+        #endregion "Creates a Nod"
     }
-
-
 }

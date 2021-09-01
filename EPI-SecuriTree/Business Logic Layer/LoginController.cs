@@ -13,10 +13,14 @@ namespace EPI_SecuriTree
 {
     class LoginController
     {
-        UserDataAccessController userCon = new UserDataAccessController();
-        Encryptor enc = new Encryptor();
-        UserManager um = new UserManager();
+        //Login manager
+        //Meaning that this class validates all the input from the login screen.
 
+        readonly UserDataAccessController userCon = new UserDataAccessController();
+        readonly Encryptor enc = new Encryptor();
+        readonly UserManager um = new UserManager();
+
+        //Validates user input
         public void Validate(string username,string password, Form temp)
         {
             DataSet ds = userCon.ValidateUser(username);            

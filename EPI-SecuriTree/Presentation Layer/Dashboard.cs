@@ -13,6 +13,9 @@ namespace EPI_SecuriTree
 {
     public partial class Dashboard : Form
     {
+
+        //Used this source code to make the rounded corners on the forms.
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
       (
@@ -24,8 +27,7 @@ namespace EPI_SecuriTree
           int nHeightEllipse // height of ellipse
       );
 
-        LoginController login = new LoginController();
-        UserManager um = new UserManager();
+        readonly UserManager um = new UserManager();
 
         public Dashboard()
         {
@@ -54,12 +56,13 @@ namespace EPI_SecuriTree
             this.Hide();
         }
 
+        //On the dashboar load it fills in all the features that the dashboard provides.
+
         private void Dashboard_Load(object sender, EventArgs e)
         {
             UserManager um = new UserManager();
             HierarchyManager man = new HierarchyManager();
-            List<string> temp = new List<string>();
-            temp = man.GetCount();
+            List<string> temp = man.GetCount();
 
             lblUn.Text = temp[0];
             lblLock.Text = temp[1]; 
@@ -67,6 +70,8 @@ namespace EPI_SecuriTree
 
             lblUser.Text = um.DeserializeUser();
         }
+
+        //Logs out of the application.
 
         private void button3_Click(object sender, EventArgs e)
         {

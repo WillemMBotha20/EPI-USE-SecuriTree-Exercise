@@ -13,7 +13,9 @@ namespace EPI_SecuriTree
 {
     public partial class ManageDoors : Form
     {
-        DoorManager manager = new DoorManager();
+        //Used this source code to make the rounded corners on the forms.
+
+        readonly DoorManager manager = new DoorManager();
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
