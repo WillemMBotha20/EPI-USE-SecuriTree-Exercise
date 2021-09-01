@@ -223,8 +223,9 @@ Steps:
 6. Make sure the branch below right says master.
 	For this project only one branch was created since there are no other collaborators.
 7. To be on the safe side. On the bottom there is a up-arrow. Click it and then select pull. This should pull all the latest changes. 
-8. Lastly click the green triangle that says start.
-9. A message should pop up that says Database Successfully created.
-10. Log in and that is it. You are in the system.
+8. Select tools above and direct to NuGet package manager. Then select manage packages for project. Finally browser for Newtonsoft.Json and install the package.
+9. Lastly click the green triangle that says start.
+10. A message should pop up that says Database Successfully created.
+11. Log in and that is it. You are in the system.
 
 ***********************************************************************************************************************************************************************************************************************************
